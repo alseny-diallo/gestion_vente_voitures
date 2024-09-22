@@ -6,19 +6,17 @@
 int main() {
     crow::SimpleApp app;
 
-    // Définir les routes
+    // routes
     CROW_ROUTE(app, "/voitures")([&]() {
-        auto result = getAllVoitures(); 
-        // Envelopper le résultat dans une réponse Crow
-        return crow::response(200, result.dump()); // .dump() pour convertir en chaîne JSON
+        auto result = getAllVoitures();
+        return result;
     });
 
     CROW_ROUTE(app, "/")([]() {
         return "Hello world";
     });
 
-    // Configurer l'adresse et le port
     app.bindaddr("127.0.0.1").port(18080).multithreaded().run();
 
-    return 0; // Retourner 0 pour indiquer que le programme s'est terminé correctement
+    return 0;
 }

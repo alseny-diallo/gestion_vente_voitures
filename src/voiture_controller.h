@@ -2,8 +2,8 @@
 #define VOITURE_CONTROLLER_H
 
 #include "database.h"
-#include <crow/json.h>
+#include "crow.h"
 
-crow::json::wvalue getAllVoitures(); // Déclaration de la fonction
+crow::response getAllVoitures(); // Déclaration de la fonction
 
 #endif // VOITURE_CONTROLLER_H

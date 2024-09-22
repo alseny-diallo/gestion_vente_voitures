@@ -1,11 +1,11 @@
-
 #include "voiture_controller.h"
+#include "crow.h"
 #include <vector>
 
-crow::json::wvalue getAllVoitures() { // Assure-toi que le nom de la fonction est le même
+crow::response getAllVoitures() {
     auto con = connectToDatabase();
     if (!con) {
-        return crow::json::wvalue{{"error", "Database connection failed."}};
+        return crow::response(500, crow::json::wvalue{{"error", "Database connection failed."}}.dump());
     }
 
     try {
@@ -23,11 +23,9 @@ crow::json::wvalue getAllVoitures() { // Assure-toi que le nom de la fonction es
             list_voitures.push_back(voiture);
         }
 
-        crow::json::wvalue result = move(list_voitures);
-        return result; // Retourne la liste des voitures
+        return crow::response(200, crow::json::wvalue(list_voitures).dump());
 
     } catch (sql::SQLException& e) {
-        return crow::json::wvalue{{"error", "Database error: " + std::string(e.what())}};
+        return crow::response(500, crow::json::wvalue{{"error", "Database error: " + std::string(e.what())}}.dump());
     }
 }
-
