@@ -12,8 +12,11 @@ execute_process(COMMAND mysql_config --libs OUTPUT_VARIABLE MYSQL_LIBS OUTPUT_ST
 include_directories(${MYSQL_CFLAGS})
 link_directories(${MYSQL_LIBS})
 
+# Rechercher tous les fichiers .cpp dans le répertoire src
+file(GLOB SOURCES "src/*.cpp")
+
 # Ajouter l'exécutable
-add_executable(gestion_vente_voitures main.cpp)
+add_executable(gestion_vente_voitures ${SOURCES} main.cpp)
 
 # Lier les bibliothèques MySQL
 target_link_libraries(gestion_vente_voitures ${MYSQL_LIBS} mysqlcppconn)
