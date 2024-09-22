@@ -39,8 +39,7 @@ int main() {
             return crow::response(200, result);
            
         } catch (sql::SQLException& e) {
-            cout << "Database error: " << e.what() << endl;
-            return crow::response(500, "Database error: " + std::string(e.what()));
+            return crow::response(500, "Database error: " + string(e.what()));
         }
 
         // Ajouter un return statement ici pour éviter le warning
