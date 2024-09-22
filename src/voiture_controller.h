@@ -4,6 +4,7 @@
 #include "database.h"
 #include "crow.h"
 
-crow::response getAllVoitures(); // Déclaration de la fonction
+crow::response getAllVoitures();
+crow::response getVoitureById(int id);
 
-#endif // VOITURE_CONTROLLER_H
+#endif 

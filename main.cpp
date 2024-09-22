@@ -12,6 +12,10 @@ int main() {
         return result;
     });
 
+    CROW_ROUTE(app, "/voitures/<int>")( [](int id) {
+        return getVoitureById(id);
+    });
+
     CROW_ROUTE(app, "/")([]() {
         return "Hello world";
     });
